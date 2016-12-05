@@ -29,7 +29,7 @@
 	display: block;
 	opacity: 0;
 	transform: scale(0);
-	transition: all .5s;
+	transition: all .5s cubic-bezier(.11,.56,0,1.52);
 	}
 .container__logo-inside{
 	position: absolute;
@@ -37,7 +37,7 @@
 	left: 39px;
 	opacity: 0;
 	transform: translate(-20px, 20px);
-	transition: all .4s;
+	transition: all .4s cubic-bezier(.77,.26,.39,.92);
 	transition-delay: .5s;
 	}
 .container__logo-bg.loaded{

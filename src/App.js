@@ -1,15 +1,21 @@
 import React, { Component } from 'react';
-import MainPage from "./app/MainPage";
 import MuiThemeProvider from "material-ui/styles/MuiThemeProvider";
+import getMuiTheme from 'material-ui/styles/getMuiTheme';
+
+import './components/Styles';
+
+const muiTheme = getMuiTheme({
+
+});
 
 class App extends Component {
 	render() {
-		return <MuiThemeProvider>
-			  <MainPage name="ZHANDOS" />
-		</MuiThemeProvider>;
+		return <MuiThemeProvider muiTheme={muiTheme}>
+				{this.props.children}
+			</MuiThemeProvider>;
 	}
 	componentDidMount() {
-		console.log("APP is Ready");
+		console.log("App is Ready");
 	}
 
 	componentWillUnmount() {

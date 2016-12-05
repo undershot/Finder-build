@@ -1,34 +1,35 @@
 import React, {Component} from "react";
 //import getMuiTheme from "material-ui/styles/getMuiTheme";
-import RaisedButton from 'material-ui/RaisedButton';
+import RaisedButton from "../components/RaisedButton";
 
 //import CircularProgress from 'material-ui/CircularProgress';
 
 import Logo from "../assets/img/logo.png";
 import LogoBg from "../assets/img/logo-bg.png";
 
-
-import "../assets/css/MainPage.css";
+// import "../assets/css/MainPage.css";
 import ImgWithStatus from "../components/ImageWithStatus";
+
+import Auth from "../components/Classes/Auth";
 
 
 class MainPage extends Component {
 	constructor(props){
 		super(props);
 		this.state = {
-			name: props.name
+
 		};
 
 	}
 
 	handleLoginForm() {
-		console.log(123);
+		let auth = new Auth();
+
+		auth.doAuth();
 	}
 
 
 	render(){
-		//<CircularProgress color="#00daff" thickness="5" />
-
 		return <div className="container__main">
 			<div className="container__logo">
 				<a href="/" className="container__logo-image">
