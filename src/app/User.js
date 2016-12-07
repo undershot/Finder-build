@@ -9,16 +9,32 @@ import SideNav from "../components/SideNav";
 import Footer from "../components/Footer";
 import PageContent from "../components/PageContent";
 
-let User = () => (
+class User extends Component{
+	componentWillMount(){
+		// if(  )
+		// location.href = "/user/pets";
+		console.log(location.href)
+	}
+
+	componentWillUnmount(){
+		// if(  )
+		// location.href = "/user/pets";
+		console.log(location.href)
+	}
+
+	render(){
+		return (
 			<div className="wrapper__app">
 				<div className="container__insight-bg">
 					<Header />
 
-
 					<div className="container__content wrapper__insight wrapper__clear">
 						<SideNav />
 
-						<PageContent />
+						<PageContent>
+							{this.props.children}
+						</PageContent>
+
 					</div>
 
 
@@ -26,6 +42,9 @@ let User = () => (
 
 				<Footer />
 			</div>
-);
+		);
+	}
+}
+
 
 export default User;

@@ -1,10 +1,15 @@
-import React from "react";
+import React, {Component} from "react";
 
 
-let PageContent = () => (
-	<div className="container__page-content">
-		content here
-	</div>
-);
+
+class PageContent extends Component {
+	render(){
+		return (
+			<div className="container__page-content">
+				{this.props.children}
+			</div>
+		);
+	}
+}
 
 export default PageContent;

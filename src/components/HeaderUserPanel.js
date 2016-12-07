@@ -1,7 +1,8 @@
 import React, {Component} from "react";
-import IconMenu from 'material-ui/IconMenu';
+import { browserHistory } from 'react-router';
+import Menu from 'material-ui/Menu';
 import MenuItem from "../components/MenuItem";
-import IconButton from 'material-ui/IconButton';
+import Popover from 'material-ui/Popover';
 import Divider from 'material-ui/Divider';
 
 // console.log(EnhancedButton.propTypes)
@@ -9,25 +10,54 @@ import Divider from 'material-ui/Divider';
 /*EnhancedButton.defaultProps.disableTouchRipple = true;
 EnhancedButton.defaultProps.disableFocusRipple = true;*/
 
+let userNameHolder = <span className="holder__header-username"></span>;
+
 class HeaderUserPanel extends Component {
 	state = {
 		menuOpened: false,
-		userName: "Артем Васильев",
-		userAvatar: "https://pp.vk.me/c636427/v636427726/34774/JLph9spYMrI.jpg"
+		userName: userNameHolder,
+		userAvatar: ""
 	};
 
-	handleOnRequestChange(){
-		console.log("opened");
+	componentWillMount(){
 	}
 
-	handleOpenMenu(){
+	componentDidMount(){
+
+		// console.log(window._sharedData)
 		this.setState({
-			menuOpened: true
+			userName: "Артем Васильев",
+			userAvatar: "https://pp.vk.me/c636427/v636427726/34774/JLph9spYMrI.jpg"
 		});
+	}
+
+	componentWillUnmount(){
+	}
+
+	handleOnRequestClose( reason ){
+		this.setState({
+			menuOpened: false
+		});
+	}
+
+	handleOpenMenu( event ){
+		this.setState({
+			menuOpened: true,
+			anchorEl: event.currentTarget
+		});
+	}
+
+	handleOnTouchTap( event, menuItem, index ){
+
+		if( menuItem.props.href ) browserHistory.push( menuItem.props.href );
+
+
+		this.handleOnRequestClose();
 	}
 
 	render(){
 		//disableTouchRipple={true}
+		// anchorEl={this.state.anchorEl}
 		return (
 			<div className="wrapper__header-user-panel wrapper__clear" onClick={this.handleOpenMenu.bind(this)}>
 
@@ -36,19 +66,27 @@ class HeaderUserPanel extends Component {
 				</div>
 
 				<div className="caption__header-username">
-					{this.state.userName}
-					<IconMenu
-						iconButtonElement={<IconButton className="mdi--faded"></IconButton>}
-						anchorOrigin={{horizontal: 'right', vertical: 'top'}}
-						targetOrigin={{horizontal: 'right', vertical: 'top'}}
+					<span className="label__header-username">
+						{this.state.userName}
+					</span>
+					<Popover
 						open={this.state.menuOpened}
-					    className="icon__header-user-panel"
+						anchorEl={this.state.anchorEl}
+						anchorOrigin={{horizontal: 'right', vertical: 'bottom'}}
+						targetOrigin={{horizontal: 'right', vertical: 'top'}}
+						onRequestClose={this.handleOnRequestClose.bind(this)}
 					>
-						<MenuItem value="1" primaryText="Мой профиль" />
-						<MenuItem value="2" primaryText="Настройки" />
-						<Divider />
-						<MenuItem value="3" primaryText="Выйти" />
-					</IconMenu>
+						<Menu
+							desktop={true}
+							onItemTouchTap={this.handleOnTouchTap.bind(this)}
+						>
+							<MenuItem value="1" href="/user/profile" primaryText="Мой профиль" />
+							<MenuItem value="2" href="/user/settings" primaryText="Настройки" />
+							<Divider />
+							<MenuItem value="3" href="/user/logout" primaryText="Выйти" />
+						</Menu>
+					</Popover>
+
 
 					<i className="mdi mdi-menu-down mdi__menu-open"/>
 				</div>

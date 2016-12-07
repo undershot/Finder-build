@@ -1,43 +1,35 @@
 import React, {Component} from "react";
+import { Link } from 'react-router';
 
 class SideNav extends Component {
 
+	state = {
+		menuItems: [
+			{href: "/user/pets", label: "Мои животные", icon: "paw"},
+			{href: "/user/losts", label: "Потеряшки", icon: "message-alert"},
+			{href: "/user/photers", label: "Фотоохотники", icon: "star"},
+			{href: "/user/gallery", label: "Галерея", icon: "burst-mode"},
+			{divider: true},
+			{href: "/user/help", label: "Помощь", icon: "help"},
+		]
+	};
+
 	render(){
+		// console.log(this.props)
 		return <div className="container__side wrapper__clear">
 			<ul className="container__side-nav">
-				<li className="item__side-nav">
-					<a href="/user/pets" className="link__side-nav active">
-						<i className="mdi mdi-paw"/>
-						Мои животные
-					</a>
-				</li>
-				<li className="item__side-nav">
-					<a href="/user/losts" className="link__side-nav">
-						<i className="mdi mdi-message-alert"/>
-						Потеряшки
-					</a>
-				</li>
-				<li className="item__side-nav">
-					<a href="/user/losts" className="link__side-nav">
-						<i className="mdi mdi-star"/>
-						Фотоохотники
-					</a>
-				</li>
-				<li className="item__side-nav">
-					<a href="/user/losts" className="link__side-nav">
-						<i className="mdi mdi-burst-mode"/>
-						Галерея
-					</a>
-				</li>
+				{this.state.menuItems.map( (value, index) => {
+					if( value.divider ) return <li key={index} className="item__divider"></li>;
 
-				<li className="item__divider"></li>
-
-				<li className="item__side-nav">
-					<a href="/user/losts" className="link__side-nav">
-						<i className="mdi mdi-help"/>
-						Помощь
-					</a>
-				</li>
+					return (
+						<li key={index} className="item__side-nav">
+							<Link to={value.href} className="link__side-nav" activeClassName="active">
+								<i className={`mdi mdi-${value.icon}`}/>
+								{value.label}
+							</Link>
+						</li>
+					);
+				} )}
 			</ul>
 		</div>
 	}

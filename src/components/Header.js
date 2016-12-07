@@ -1,12 +1,13 @@
 import React from "react";
 import SearchInsight from "./SearchInsight";
 import HeaderUserPanel from "./HeaderUserPanel";
+import {Link} from "react-router";
 
 
 let Header = () => (
 	<div className="container__header ">
 		<div className="wrapper__insight wrapper__clear">
-			<a href="#" className="link__logo-min"></a>
+			<Link className="link__logo-min" to="/" />
 
 			<SearchInsight />
 

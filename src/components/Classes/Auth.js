@@ -1,3 +1,4 @@
+import { browserHistory } from 'react-router';
 
 class Auth {
 	constructor(){
@@ -5,8 +6,14 @@ class Auth {
 	}
 
 	doAuth(){
-		console.log("do auth!");
-		location.href = "/user"
+		console.log(
+			window._sharedData.userId
+		);
+
+		browserHistory.push( "/user" );
+
+		window._sharedData.userId = 123;
+
 	}
 }
 
